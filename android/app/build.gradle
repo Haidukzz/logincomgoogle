@@ -1,0 +1,46 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin" // Plugin do Flutter
+}
+
+android {
+    namespace = "com.example.loginn3"
+    compileSdk 33 // Certifique-se de que seja compatível com sua configuração
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    defaultConfig {
+        applicationId "com.example.loginn3" // Ajuste para o mesmo ID usado no Firebase
+        minSdk 21 // Compatível com Flutter e Firebase
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.debug
+        }
+    }
+}
+
+flutter {
+    source = "../.."
+}
+
+dependencies {
+    implementation platform('com.google.firebase:firebase-bom:32.2.2') // Firebase BOM
+    implementation 'com.google.firebase:firebase-auth-ktx' // Firebase Authentication
+    implementation 'com.google.firebase:firebase-firestore-ktx' // Firestore (opcional)
+    implementation 'com.google.android.gms:play-services-auth:20.7.0' // Login com Google
+}
+
+apply plugin: 'com.google.gms.google-services'
